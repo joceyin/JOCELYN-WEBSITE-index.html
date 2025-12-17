@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memories</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
+
+    <style>
+	    /* Navigation */
+    nav {
+      text-align: center;
+      margin-bottom: 40px;
+      font-family: 'Playfair Display', serif;
+    }
+	
+    nav a {
+      margin: 0 70px;
+      text-decoration: none;
+      color: #633244;
+      font-weight: bold;
+    }
+
+	nav a:hover {
+	color: #b36b7d;  /* color when mouse hovers */
+	}
+	
+        body {
+            margin: 0;
+            background-color: #d8c9cd;
+            font-family: 'Roboto', sans-serif;
+            color: #5b3b4a;
+        }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      margin-bottom: 5px;
+    }
+    h1 span {
+      font-size: 18px;
+      font-weight: normal;
+      margin-left: 10px;
+    }
+	
+        /* Main box */
+        main {
+            background-color: #f5f2ee;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Gallery layout */
+        .gallery {
+            display: flex;        /* put items in a row */
+            flex-wrap: wrap;      /* make items go DOWN if no space */
+            gap: 20px;            /* space between photos */
+        }
+
+        /* Each photo */
+        .photo-box {
+            width: 100%;          /* full width on small screen */
+            max-width: 260px;     /* limit size on big screen */
+            margin: auto;
+        }
+
+        .photo-box img {
+            width: 100%;
+            border-radius: 10px;
+            border: 10px solid #f5f2ee;
+            box-shadow: 0 5px 10px rgba(99, 50, 68, 0.2);
+        }
+
+		.photo-box video {
+			width: 100%;
+			border-radius: 10px;
+			border: 10px solid #f5f2ee;
+			box-shadow: 0 5px 10px rgba(99, 50, 68, 0.2);
+		}
+
+        .caption {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            margin-top: 5px;
+            color: #633244;
+        }
+    </style>
+</head>
+
+<body>
+	<!-- Navigation -->
+	<nav>
+		<a href="Jocelyn's Blog.html">HOME</a>
+		<a href="HW/B2_Learn With Me.html"">LEARN WITH ME</a>
+		<a href="jo's photos.html">GALLERY</a>
+		<a href="https://admin.tcu.edu.tw/TCUstweb/Stmain.php">iTCU</a>
+		<a href="contact.html">CONTACT ME</a>
+	</nav>
+    <main>
+		<h1> Some Photos</h1>
+        <div class="gallery">
+            <div class="photo-box">
+                <img src="Global Village.jpg" alt="Global Village">
+                <div class="caption">Tzu Chi's Global Village Event 2024</div>
+            </div>
+
+            <div class="photo-box">
+                <img src="Mid Autumn.jpg" alt="Mid Autumn">
+                <div class="caption">Mid Autumn Festival Cooking</div>
+            </div>
+
+            <div class="photo-box">
+                <img src="BM CU.jpg" alt="BM CU">
+                <div class="caption">Business Management Event - Chicken Universe</div>
+            </div>
+
+            <div class="photo-box">
+                <img src="TCU ANNIV.jpg" alt="TCU ANNIV">
+                <div class="caption">TCU Anniversary Night - Indonesian</div>
+            </div>
+			
+            <div class="photo-box">
+                <img src="BM PHOTO.jpg" alt="BM PHOTO">
+                <div class="caption">Business Management Freshmen 113</div>
+            </div>
+			
+            <div class="photo-box">
+                <img src="XSMAS.jpg" alt="XSMAS">
+                <div class="caption">Business Management 1st Year Christmas Dinner</div>
+            </div>
+
+            <div class="photo-box">
+                <img src="SR.jpg" alt="SR">
+                <div class="caption">Sweet Relief Project</div>
+            </div>
+
+            <div class="photo-box">
+                <img src="TPE.jpg" alt="TPE">
+                <div class="caption">Cultural City Exploration - Going To Taipei</div>
+            </div>
+
+            <div class="photo-box">
+                <img src="TPE2.jpg" alt="TPE2">
+                <div class="caption">Cultural City Exploration - Going To Taipei</div>
+            </div>
+
+            <div class="photo-box">
+                <img src="MARTAMART.jpg" alt="MARTAMART">
+                <div class="caption">Martamart Project Booth</div>
+            </div>
+
+            <div class="photo-box">
+                <img src="INTER.jpg" alt="INTER">
+                <div class="caption">Interdisciplinary Class going to Gengfutian Farm</div>
+            </div>
+
+            <div class="photo-box">
+                <img src="HL.jpg" alt="HL">
+                <div class="caption">Hualien City Exploration - 將軍府 Tour</div>
+			</div>	
+            <div class="photo-box">
+                <img src="HL2.jpg" alt="HL">
+                <div class="caption">Hualien City Exploration - Going To 阿美 Factory Tour</div>
+			</div>
+            <div class="photo-box">
+                <img src="HL1.jpg" alt="HL">
+                <div class="caption">Hualien City Exploration - 將軍府 Tour</div>				
+            </div>			
+            </div>
+		<h1> Some Videos</h1><br>	
+        <div class="gallery">
+            <div class="photo-box">
+		<video controls>	
+                <source src="Global Village 2025.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+				</video>	
+                <div class="caption">Tzu Chi's Global Village Event 2025</div>
+            </div>	
+            <div class="photo-box">
+		<video controls>	
+                <source src="Farglory.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+				</video>	
+                <div class="caption">Farglory Trip!</div>
+            </div>	
+            <div class="photo-box">
+		<video controls>	
+                <source src="weekend.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+				</video>	
+                <div class="caption">Short Trip Going To Taipei.</div>
+            </div>			
+		</div>
+    </main>
+</body>
+</html>

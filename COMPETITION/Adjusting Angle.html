@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adjusting Angle Game</title>
+<style>
+  body {
+    margin: 0;
+    background: #111;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+  }
+  canvas {
+    background: #222;
+    display: block;
+    margin: 0 auto;
+  }
+  button {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 32px;
+    font-size: 20px;
+    color: white;
+    background: #28a745;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #32cd32;
+  }
+  #startButton { top: 45%; }
+  #playAgainButton { top: 65%; display: none; }
+</style>
+</head>
+<body>
+<canvas id="gameCanvas"></canvas>
+<button id="startButton">Start Game</button>
+<button id="playAgainButton">Play Again</button>
+
+<script>
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+const startButton = document.getElementById("startButton");
+const playAgainButton = document.getElementById("playAgainButton");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let gameStarted = false, gameEnded = false;
+let targetAngle = 0, currentAngle = 0;
+let isDragging = false;
+
+// Posisi titik awal (garis mulai)
+const startPoint = { x: canvas.width / 2, y: canvas.height - 100 };
+
+// Meja (area bawah)
+const tableHeight = 100;
+
+// Reset game
+function resetGame() {
+  gameEnded = false;
+  targetAngle = Math.floor(Math.random() * 181); // target acak 0–180 derajat
+  currentAngle = 0;
+  isDragging = false;
+}
+
+// Mouse control
+canvas.addEventListener("mousedown", (e) => {
+  if (!gameStarted || gameEnded) return;
+  isDragging = true;
+});
+
+canvas.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+  const rect = canvas.getBoundingClientRect();
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+  const dx = mouseX - startPoint.x;
+  const dy = startPoint.y - mouseY; // Y canvas terbalik
+
+  currentAngle = Math.atan2(dy, dx) * 180 / Math.PI;
+  if (currentAngle < 0) currentAngle += 360;
+  if (currentAngle > 180) currentAngle = 180; // batasi max 180°
+});
+
+canvas.addEventListener("mouseup", (e) => {
+  if (!isDragging) return;
+  isDragging = false;
+  gameEnded = true;
+});
+
+// Draw everything
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Meja
+  ctx.fillStyle = "#555";
+  ctx.fillRect(0, canvas.height - tableHeight, canvas.width, tableHeight);
+
+  // Titik awal
+  ctx.beginPath();
+  ctx.arc(startPoint.x, startPoint.y, 10, 0, Math.PI * 2);
+  ctx.fillStyle = "black";
+  ctx.fill();
+  ctx.closePath();
+
+  // Garis merah (current angle)
+  const currentRad = currentAngle * Math.PI / 180;
+  ctx.beginPath();
+  ctx.moveTo(startPoint.x, startPoint.y);
+  ctx.lineTo(startPoint.x + Math.cos(currentRad) * 150, startPoint.y - Math.sin(currentRad) * 150);
+  ctx.strokeStyle = "red";
+  ctx.lineWidth = 4;
+  ctx.stroke();
+  ctx.closePath();
+
+  // Tampilkan target sebagai angka
+  ctx.font = "28px Arial";
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+  ctx.fillText("Target: " + targetAngle.toFixed(0) + "°", canvas.width / 2, 50);
+
+  // Jika game berakhir → tampilkan hasil
+  if (gameEnded) {
+    let diff = Math.abs(currentAngle - targetAngle);
+    if (diff > 180) diff = 360 - diff; // gunakan selisih terkecil
+
+    // Hitung akurasi (100% jika sama persis)
+    const accuracy = Math.max(0, Math.round(100 - (diff / 180) * 100));
+
+    ctx.fillText("Result: " + currentAngle.toFixed(0) + "°", canvas.width / 2, 90);
+    ctx.fillText("Accuracy: " + accuracy + "%", canvas.width / 2, 130);
+
+    ctx.font = "36px Arial";
+    if (accuracy === 100) ctx.fillText("Congratulations!", canvas.width / 2, 180);
+    else if (accuracy >= 70) ctx.fillText("Nice!", canvas.width / 2, 180);
+    else ctx.fillText("Try Again", canvas.width / 2, 180);
+
+    playAgainButton.style.display = "block";
+  }
+
+  if (gameStarted) requestAnimationFrame(draw);
+}
+
+// Start game
+function startGame() {
+  startButton.style.display = "none";
+  playAgainButton.style.display = "none";
+  resetGame();
+  gameStarted = true;
+  draw();
+}
+
+startButton.addEventListener("click", startGame);
+playAgainButton.addEventListener("click", startGame);
+
+</script>

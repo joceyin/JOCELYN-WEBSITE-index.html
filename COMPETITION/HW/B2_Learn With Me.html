@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Learn With Me</title>
+	<link rel="stylesheet" href="style2.css">
+
+    <style>
+        /* NAME INPUT */
+        #nameBox {
+            text-align: center;
+            margin-top: 40px;
+            background: rgba(255,255,255,0.85);
+            display: block;
+            padding: 20px;
+            border-radius: 12px;
+            width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+		#username {
+			padding: 10px;
+			border: 2px solid black;
+			border-radius: 10px;
+			font-size: 16px;
+			width: 70%;
+			margin-right: 10px; 
+		}
+
+
+        #enterBtn {
+            padding: 8px 16px;
+            margin-left: 8px;
+            border: 2px solid black;
+            border-radius: 8px;
+			margin-top: 30px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* MAIN CONTENT */
+        #mainContent {
+            display: none;
+            margin-top: 30px;
+            background: rgba(255,255,255,0.85);
+            padding: 18px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #mainTitle,
+        #greeting {
+            display: none;
+            text-align: center;
+            margin: 6px 0 16px 0;
+        }
+
+        /* HAPUS bagian di bawah karena sudah ada di style2.css */
+        /* .left-image {...} */
+        /* table {...} */
+        /* th, td {...} */
+        /* button.weather-btn {...} */
+
+    </style>
+</head>
+<body>
+
+    <!-- NAME BOX -->
+    <div id="nameBox" aria-live="polite">
+        <h2>Welcome!</h2>
+        <p>Please enter your name:</p>
+
+        <input type="text" id="username" placeholder="Your name" autocomplete="off" />
+        <button id="enterBtn">Enter</button>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="mainContent" aria-hidden="true">
+        <h2 id="greeting"></h2>
+        <h1 id="mainTitle">Learn Together With Me!</h1>
+
+        <table>
+            <tr>
+                <th>Picture</th>
+                <th>Button</th>
+            </tr>
+
+            <tr>
+                <td><img src="rain.jpg" class="left-image"></td>
+                <td><button id="tableBtn1">Click Me!</button></td>
+            </tr>
+
+            <tr>
+                <td><img src="lightning.jpg" class="left-image"></td>
+                <td><button id="tableBtn2">Click Me!</button></td>
+            </tr>
+
+            <tr>
+                <td><img src="sunny.jpg" class="left-image"></td>
+                <td><button id="tableBtn3">Click Me!</button></td>
+            </tr>
+
+            <tr>
+                <td><img src="cloudy.jpg" class="left-image"></td>
+                <td><button id="tableBtn4">Click Me!</button></td>
+            </tr>
+
+            <tr>
+                <td><img src="stormy.jpg" class="left-image"></td>
+                <td><button id="tableBtn5">Click Me!</button></td>
+            </tr>
+
+            <tr>
+                <td><img src="snowy.jpg" class="left-image"></td>
+                <td><button id="tableBtn6">Click Me!</button></td>
+            </tr>		
+        </table>
+
+<h2 style="margin-top: 100px; text-align: center;">How's your mood after studying?</h2>
+
+
+    <!-- Mood 1-->
+    <div style="display: flex; justify-content: center; gap: 200px;">
+        <ul style="list-style-image:url('happy.png');">
+            <li style="text-align: center; font-size: 40px; font-family:Bradley Hand ITC;">good!</li>
+        </ul>
+
+        <ul style="list-style-image:url('sad.png');">
+            <li style="text-align: center; font-size: 40px; font-family:Bradley Hand ITC;">sad</li>
+        </ul>
+    </div>
+
+    <!-- Mood 2 -->
+    <div style="display: flex; justify-content: center; gap: 202px;">
+        <ul style="list-style-image:url('excited.png');">
+            <li style="text-align: center; font-size: 40px; font-family:Bradley Hand ITC;">excited</li>
+        </ul>
+
+        <ul style="list-style-image:url('proud.png');">
+            <li style="text-align: center; font-size: 40px; font-family:Bradley Hand ITC;">proud</li>
+        </ul>
+    </div>
+
+
+
+    <!-- SCRIPT -->
+    <script>
+        const nameBox = document.getElementById('nameBox');
+        const usernameInput = document.getElementById('username');
+        const enterBtn = document.getElementById('enterBtn');
+
+        const mainContent = document.getElementById('mainContent');
+        const greeting = document.getElementById('greeting');
+        const mainTitle = document.getElementById('mainTitle');
+
+        function enterNameAndShow() {
+            const name = usernameInput.value.trim();
+            if (name === '') {
+                alert('Please enter your name!');
+                usernameInput.focus();
+                return;
+            }
+
+            greeting.textContent = 'Hello, ' + name + '!';
+
+            nameBox.style.display = 'none';
+            mainContent.style.display = 'block';
+            mainContent.setAttribute('aria-hidden', 'false');
+
+            greeting.style.display = 'block';
+            mainTitle.style.display = 'block';
+        }
+
+        enterBtn.addEventListener('click', enterNameAndShow);
+
+        usernameInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') enterNameAndShow();
+        });
+
+        document.getElementById("tableBtn1").onclick = function () {
+            this.textContent = "Rain";
+            this.style.color = "white";
+            this.style.backgroundColor = "blue";
+        }
+        document.getElementById("tableBtn2").onclick = function () {
+            this.textContent = "Lightning";
+            this.style.color = "white";
+            this.style.backgroundColor = "gray";
+        }
+        document.getElementById("tableBtn3").onclick = function () {
+            this.textContent = "Sunny";
+            this.style.color = "white";
+            this.style.backgroundColor = "SandyBrown";
+        }
+        document.getElementById("tableBtn4").onclick = function () {
+            this.textContent = "Cloudy";
+            this.style.color = "white";
+            this.style.backgroundColor = "teal";
+        }
+        document.getElementById("tableBtn5").onclick = function () {
+            this.textContent = "Stormy";
+            this.style.color = "white";
+            this.style.backgroundColor = "navy";
+        }
+        document.getElementById("tableBtn6").onclick = function () {
+            this.textContent = "Snowy";
+            this.style.color = "white";
+            this.style.backgroundColor = "DeepSkyBlue";
+        }
+    </script>
+	
+</body>
+</html>

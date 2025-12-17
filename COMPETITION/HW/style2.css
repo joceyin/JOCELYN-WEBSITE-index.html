@@ -1,0 +1,61 @@
+/* Background image */
+body {
+    background-image: url('bg2.jpg'); 
+	background-size: cover;
+	background-repeat: repeat;
+	background-position: center;
+    background-attachment: fixed;
+}
+
+/* Text styling */
+h1 {
+    text-align: center;
+    font-size: 24pt;
+    font-weight: bold;
+    color: black; 
+    margin-top: 40px;
+}
+/* image + button */
+.section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 40px;
+}
+
+/* Left image */
+.left-image {
+    width: 300px; 
+    height: 300px;
+    border-radius: 10px;
+}
+
+/* Button styling */
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    font-family: Times New Roman;
+    font-weight: bold;
+    border-radius: 20px;
+    border: 2px solid black;
+    background-color: #f5f5f5;
+}
+
+table {
+    width: 70%;          /* make table wider */
+    margin: 30px auto;   /* center table */
+    border-collapse: collapse;
+	border: 3px solid black;
+}
+
+th, td {
+    padding: 20px;       /* more space inside cells */
+    text-align: center;  /* center content */
+	border: 3px solid black;
+}
+
+.mood-text li {
+    font-size: 22px;
+    font-family: Garamond,
+}

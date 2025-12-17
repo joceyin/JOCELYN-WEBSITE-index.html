@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bouncing Ball Game</title>
+<style>
+  body {
+    margin: 0;
+    background-color: #111;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+  }
+
+  canvas {
+    display: block;
+    background-color: #222;
+    margin: 0 auto;
+  }
+
+  #startButton, #restartButton {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 32px;
+    font-size: 20px;
+    color: white;
+    background-color: #28a745;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 255, 0, 0.4);
+  }
+
+  #startButton:hover, #restartButton:hover {
+    background-color: #32cd32;
+  }
+
+  #startButton {
+    top: 45%;
+  }
+
+  #restartButton {
+    top: 65%;
+    display: none;
+  }
+</style>
+</head>
+<body>
+<canvas id="gameCanvas"></canvas>
+<button id="startButton">Start Game</button>
+<button id="restartButton">Start Again</button>
+
+<script>
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+const startButton = document.getElementById("startButton");
+const restartButton = document.getElementById("restartButton");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let gameStarted = false;
+let gameOver = false;
+let score = 0;
+let bounceCount = 0;
+
+// Paddle
+const paddle = {
+  width: 120,
+  height: 15,
+  x: canvas.width / 2 - 60,
+  y: canvas.height - 40,
+  color: "limegreen"
+};
+
+// Ball
+const ball = {
+  x: canvas.width / 2,
+  y: canvas.height / 2,
+  radius: 12,
+  color: "violet",
+  dx: 3,
+  dy: -3
+};
+
+// Reset game
+function resetGame() {
+  score = 0;
+  bounceCount = 0;
+  gameOver = false;
+  ball.x = canvas.width / 2;
+  ball.y = canvas.height / 2;
+  ball.dx = 3;
+  ball.dy = -3;
+}
+
+// Mouse control
+canvas.addEventListener("mousemove", (event) => {
+  if (!gameStarted) return;
+  const rect = canvas.getBoundingClientRect();
+  const mouseX = event.clientX - rect.left;
+  paddle.x = mouseX - paddle.width / 2;
+  if (paddle.x < 0) paddle.x = 0;
+  if (paddle.x + paddle.width > canvas.width)
+    paddle.x = canvas.width - paddle.width;
+});
+
+// Draw functions
+function drawPaddle() {
+  ctx.fillStyle = paddle.color;
+  ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+}
+
+function drawBall() {
+  ctx.beginPath();
+  ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+  ctx.fillStyle = ball.color;
+  ctx.fill();
+  ctx.closePath();
+}
+
+function drawScore() {
+  ctx.font = "20px Arial";
+  ctx.textAlign = "right";
+  ctx.fillText("Score: " + score, canvas.width - 20, 30);
+}
+
+function drawGameOver() {
+  ctx.fillStyle = "red";
+  ctx.font = "48px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2 - 30);
+  ctx.fillStyle = "white";
+  ctx.font = "28px Arial";
+  ctx.fillText("Final Score: " + score, canvas.width / 2, canvas.height / 2 + 20);
+  ctx.font = "20px Arial";
+  ctx.fillText("Click 'Start Game' to play again", canvas.width / 2, canvas.height / 2 + 60);
+  restartButton.style.display = "block";
+}
+
+// Update ball speed
+function updateBallSpeed() {
+  if (bounceCount <= 2) {
+    ball.dx = ball.dx > 0 ? 2.5 : -2.5;
+    ball.dy = ball.dy > 0 ? 2.5 : -2.5;
+  } else if (bounceCount <= 4) {
+    ball.dx = ball.dx > 0 ? 3.5 : -3.5;
+    ball.dy = ball.dy > 0 ? 3.5 : -3.5;
+  } else if (bounceCount <= 8) {
+    ball.dx = ball.dx > 0 ? 4.5 : -4.5;
+    ball.dy = ball.dy > 0 ? 4.5 : -4.5;
+  } else if (bounceCount <= 10) {
+    ball.dx = ball.dx > 0 ? 5.5 : -5.5;
+    ball.dy = ball.dy > 0 ? 5.5 : -5.5;
+  } else {
+    // Setelah bounce ke-10, setiap pantulan tambah kecepatan 0.5
+    ball.dx += (ball.dx > 0 ? 0.5 : -0.5);
+    ball.dy += (ball.dy > 0 ? 0.5 : -0.5);
+  }
+}
+
+// Game loop
+function update() {
+  if (!gameStarted || gameOver) return;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ball.x += ball.dx;
+  ball.y += ball.dy;
+
+  // Bounce kiri/kanan
+  if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) ball.dx *= -1;
+  // Bounce atas
+  if (ball.y - ball.radius < 0) ball.dy *= -1;
+
+  // Paddle collision
+  if (ball.y + ball.radius > paddle.y && ball.x > paddle.x && ball.x < paddle.x + paddle.width) {
+    ball.dy *= -1;
+    ball.y = paddle.y - ball.radius;
+    score++;
+    bounceCount++;
+    updateBallSpeed();
+  }
+
+  // Game over jika bola jatuh
+  if (ball.y - ball.radius > canvas.height) {
+    gameOver = true;
+  }
+
+  drawPaddle();
+  drawBall();
+  drawScore();
+
+  if (gameOver) {
+    drawGameOver();
+    gameStarted = false;
+  } else {
+    requestAnimationFrame(update);
+  }
+}
+
+// Start game
+function startGame() {
+  startButton.style.display = "none";
+  restartButton.style.display = "none";
+  resetGame();
+  gameStarted = true;
+  update();
+}
+
+startButton.addEventListener("click", startGame);
+restartButton.addEventListener("click", startGame);
+</script>

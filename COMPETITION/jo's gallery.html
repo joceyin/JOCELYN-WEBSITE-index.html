@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jo's Gallery</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
+
+	<!-- Basic CSS -->
+	<style>
+    body {
+      background-color: #d8c9cd;   /* Soft cream */
+      font-family: 'Roboto', sans-serif;
+      color: #633244;             /* Dark rose */
+      margin: 0;
+    }
+
+    /* Navigation */
+    nav {
+      text-align: center;
+      margin-bottom: 40px;
+      font-family: 'Playfair Display', serif;
+    }
+    nav a {
+      margin: 0 70px;
+      text-decoration: none;
+      color: #633244;
+      font-weight: bold;
+    }
+
+	nav a:hover {
+	color: #b36b7d;  /* color when mouse hovers */
+	}
+	
+    /* Page Title */
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      margin-bottom: 5px;
+    }
+    h1 span {
+      font-size: 18px;
+      font-weight: normal;
+      margin-left: 10px;
+    }
+
+    /* Gallery */
+    .gallery {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;     /* Makes scrolling */
+      padding-bottom: 15px;
+    }
+
+    /* Each Card */
+    .card {
+      width: 520px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 10px rgba(99, 50, 68, 0.2);
+      cursor: pointer;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .card img {
+      width: 100%;
+      height: 230px;
+      border-radius: 15px 15px 0 0;
+      object-fit: cover;
+    }
+
+    .caption {
+      padding: 10px;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #5b3b4a;
+      font-weight: bold;
+    }
+
+    /* View journal text */
+    .view-journal {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    /* Mobile */
+    @media (max-width: 700px) {
+      .card {
+        width: 160px;
+      }
+      .card img {
+        height: 200px;
+      }
+      h1 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+	<a href="Jocelyn's Blog.html">HOME</a>
+    <a href="HW/B2_Learn With Me.html"">LEARN WITH ME</a>
+    <a href="jo's photos.html">GALLERY</a>
+    <a href="https://admin.tcu.edu.tw/TCUstweb/Stmain.php">iTCU</a>
+    <a href="contact.html">CONTACT ME</a>
+  </nav>
+
+  <!-- Title -->
+  <h1>
+    MY PROJECTS
+  </h1>
+
+	<!-- Gallery Section -->
+	<div class="gallery">
+    <div class="card">
+		<img src="pro1.jpg">
+		<div class="caption">Business Stall Project called "Sweet Relief". We are selling handmade flowers, snack cake pops, and polvoron to raise funds for donation to Myanmar.</div>
+    </div>
+
+    <div class="card">
+		<img src="pro2.jpg">
+		<div class="caption">Organized a business stall project at a university event called “Martamart” selling martabak telur, as part of a class project to gain real experience in entrepreneurship.</div>
+    </div>
+
+	<div class="card">
+	<iframe src="ball and paddle.html"
+         style="width:100%; height:230px; border:none; border-radius:15px 15px 0 0;"></iframe>
+	<div class="caption">As part of a project to create simple and creative games, I decided to make a game called “Ball and Paddle.” </div>
+	</div>
+
+	<div class="card">
+	<iframe src="Adjusting Angle.html"
+         style="width:100%; height:230px; border:none; border-radius:15px 15px 0 0;"></iframe>
+	<div class="caption">As part of a project to create simple and creative games, I decided to make a game called “Adjusting Angle.” </div>
+	</div>
+	</div>
+
+	<div class="gallery">
+    <div class="card">
+		<img src="pro5.jpg">
+		<div class="caption">Conducted a project and report titled “Implementation of the Government Card System
+		Technology as an Effort to Develop the Rice Subsidy System in Pandeglang Regency” involving research and building a prototype tool (2023).</div>
+		</div>
+
+    <div class="card">
+		<img src="pro4.jpg">
+		<div class="caption">Conducted a project and report titled “Development of a Mobile-Based Interactive Application for Learning History” involving research and creating a functional prototype (2024).</div>
+		</div>
+		
+    <div class="card">
+		<img src="pro6.jpg">
+		<div class="caption">Participated in a university program to accompany students from Pahoa School, Indonesia, during their campus visit for two days.</div>
+		</div>
+
+    <div class="card">
+		<img src="pro7.jpg">
+		<div class="caption">Becoming a volunteer at Tzu Chi Hospital Indonesia, Jakarta</div>
+		</div>		
+	</div>
+
+  <!-- Basic Script -->
+  <script>
+    const gallery = document.querySelector('.gallery');
+    document.getElementById('leftArrow').onclick = () => {
+      gallery.scrollBy({ left: -260, behavior: 'smooth' });
+    };
+    document.getElementById('rightArrow').onclick = () => {
+      gallery.scrollBy({ left: 260, behavior: 'smooth' });
+    };
+  </script>
+
+</body>
+</html>
